@@ -6,7 +6,7 @@ export default function Home() {
 
   useEffect(() => {
     const SHEET_ID = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
-    const API_KEY  = "AIzaSyD0BmGBsG8F1SuRpVY53EpVJLm6g9NNWyw";
+    const API_KEY  = process.env.NEXT_PUBLIC_API_KEY;
     const RANGE    = "Sheet1!A:B";
 
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)
