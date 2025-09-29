@@ -9,7 +9,7 @@ export default function Home() {
 const sheetId = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
 const range  = "Sheet1!A:B";
 
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
+`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
       .then(res => res.json())
       .then(data => {
         const rows = data.values?.slice(1) || [];
