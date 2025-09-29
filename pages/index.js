@@ -4,8 +4,8 @@ export default function Home() {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    const sheetId = process.env.NEXT_PUBLIC_SHEET_ID;     // coloque no .env da Vercel
-    const apiKey  = process.env.NEXT_PUBLIC_API_KEY;      // coloque no .env da Vercel
+    const sheetId = process.env.NEXT_PUBLIC_SHEET_ID;     // coloque no .env
+    const apiKey  = process.env.NEXT_PUBLIC_API_KEY;      // coloque no .env
     const range   = 'Sheet1!A:B';
 
     fetch(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`)
