@@ -1,40 +1,39 @@
-import { useEffect, useState } from "react";
+// index.js
+// === CONFIGURAÇÃO ===
+const SHEET_ID = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
+const API_KEY = "AIzaSyD0BmGBsG8F1SuRpVY53EpVJLm6g9NNWyw";
+const RANGE = "Sheet1!A:B"; // Colunas Nome e URL
 
-export default function Home() {
-  const [produtos, setProdutos] = useState([]);
+// === FUNÇÃO PARA BUSCAR DADOS ===
+async function loadLinks() {
+  const endpoint = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`;
+  try {
+    const res = await fetch(endpoint);
+    const data = await res.json();
 
-  useEffect(() => {
-    async function carregar() {
-      const sheetId = https://docs.google.com/spreadsheets/d/SEU_ID_AQUI/edit?usp=sharing
-      const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
-      const range = "Links!A:B"; // aba "Links", colunas A e B
-
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
-      const res = await fetch(url);
-      const data = await res.json();
-
-      if (data.values) {
-        // pula a primeira linha (cabeçalho)
-        setProdutos(data.values.slice(1));
-      }
+    if (!data.values || data.values.length < 2) {
+      document.getElementById("links").innerHTML = "<p>Nenhum dado encontrado.</p>";
+      return;
     }
-    carregar();
-  }, []);
 
-  return (
-    <main style={{ padding: 20 }}>
-      <h1>Lolla.Divulgação</h1>
-      <p>Produtos da Shein com link de afiliada</p>
+    // Remove cabeçalho
+    const [header, ...rows] = data.values;
 
-      <ul>
-        {produtos.map((row, idx) => (
-          <li key={idx}>
-            <a href={row[1]} target="_blank" rel="noopener noreferrer">
-              {row[0]}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </main>
-  );
+    // Monta lista de produtos
+    const html = rows
+      .map(row => {
+        const nome = row[0] || "Produto sem nome";
+        const url = row[1] || "#";
+        return `<li><a href="${url}" target="_blank">${nome}</a></li>`;
+      })
+      .join("");
+
+    document.getElementById("links").innerHTML = `<ul>${html}</ul>`;
+  } catch (err) {
+    console.error(err);
+    document.getElementById("links").innerHTML = "<p>Erro ao carregar links.</p>";
+  }
 }
+
+// === INICIAR ===
+document.addEventListener("DOMContentLoaded", loadLinks);
