@@ -5,7 +5,7 @@ export default function Home() {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    const SHEET_ID = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
+    const SHEET_ID = "AIzaSyD0BmGBsG8F1SuRpVY53EpVJLm6g9NNWyw";
     const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
     const RANGE    = "Sheet1!A:B";
 
