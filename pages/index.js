@@ -5,7 +5,7 @@ export default function Home() {
 
   useEffect(() => {
     async function carregar() {
-      const sheetId = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
+      const sheetId = https://docs.google.com/spreadsheets/d/SEU_ID_AQUI/edit?usp=sharing
       const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
       const range = "Links!A:B"; // aba "Links", colunas A e B
 
