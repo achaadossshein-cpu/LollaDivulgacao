@@ -5,11 +5,11 @@ export default function Home() {
   const [links, setLinks] = useState([]);
 
   useEffect(() => {
-    const SHEET_ID = "AIzaSyD0BmGBsG8F1SuRpVY53EpVJLm6g9NNWyw";
-    const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-    const RANGE    = "Sheet1!A:B";
+    const apiKey = process.env.NEXT_PUBLIC_GOOGLE_API_KEY;
+const sheetId = "1towIpLR5wZUORrFy7vqq7mXKaK8Uff0EnRnaToC5zkk";
+const range  = "Sheet1!A:B";
 
-    fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${RANGE}?key=${API_KEY}`)
+const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}?key=${apiKey}`;
       .then(res => res.json())
       .then(data => {
         const rows = data.values?.slice(1) || [];
